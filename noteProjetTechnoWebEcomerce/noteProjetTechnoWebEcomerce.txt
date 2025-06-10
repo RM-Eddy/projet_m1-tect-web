@@ -1,4 +1,9 @@
 ***** Générer la structure du projet ****
+* Nom du Projet : projet_m1-tect-web
+
+* Lien repo git du projet  : 
+https://github.com/RM-Eddy/projet_m1-tect-web
+
 
 * Structure recommandée : 
 projet_m1-tect-web/
@@ -15,3 +20,38 @@ nest new backend
 
 ** Se placer dans le dossier
 cd backend
+
+* Installer les dépendances PostgreSQL et Swagger : 
+* PostgreSQL + TypeORM
+npm install @nestjs/typeorm typeorm pg
+
+* Swagger
+npm install --save @nestjs/swagger swagger-ui-express
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
