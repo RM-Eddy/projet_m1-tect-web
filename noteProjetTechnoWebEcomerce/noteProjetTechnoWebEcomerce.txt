@@ -1,0 +1,17 @@
+***** Générer la structure du projet ****
+
+* Structure recommandée : 
+projet_m1-tect-web/
+├── backend/          ← NestJS (API REST + Swagger + PostgreSQL)
+├── frontend/         ← Next.js (UI depuis Figma)
+└── README.md
+
+* Créer le Backend (NestJS) :
+** Installer le CLI NestJS :
+npm i -g @nestjs/cli
+
+** Créer le projet backend: 
+nest new backend
+
+** Se placer dans le dossier
+cd backend
