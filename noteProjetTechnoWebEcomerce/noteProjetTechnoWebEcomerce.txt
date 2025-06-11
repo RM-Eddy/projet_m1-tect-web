@@ -4,6 +4,18 @@
 * Lien repo git du projet  : 
 https://github.com/RM-Eddy/projet_m1-tect-web
 
+* Structure Générale :
+projet/
+├── .git/
+├── .gitignore   ← ICI
+├── noteProjetTechnoWebEcomerce/
+├── projet_m1-tect-web/
+│   └── backend/
+│       ├── node_modules/
+│       ├── dist/
+│       ├── src/
+│       ├── package.json
+└── README.md
 
 * Structure recommandée : 
 projet_m1-tect-web/
@@ -27,6 +39,15 @@ npm install @nestjs/typeorm typeorm pg
 
 * Swagger
 npm install --save @nestjs/swagger swagger-ui-express
+
+* Exécute cette commande dans le dossier backend :
+npm install class-validator class-transformer
+
+
+Dépendance	Rôle principal				Utilisation typique
+
+class-validator	Valider les champs d’un DTO			@IsNotEmpty(), @IsEmail(), etc.
+class-transformer	Transformer un objet brut en instance de classe	plainToInstance() ou via ValidationPipe
 
 
 
