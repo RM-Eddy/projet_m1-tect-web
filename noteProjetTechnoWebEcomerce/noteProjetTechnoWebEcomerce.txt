@@ -1,4 +1,4 @@
-***** Générer la structure du projet ****
+***** Conception du projet ****
 * Nom du Projet : projet_m1-tect-web
 
 * Lien repo git du projet  : 
