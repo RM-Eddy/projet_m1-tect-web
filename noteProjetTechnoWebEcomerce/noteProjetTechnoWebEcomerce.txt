@@ -29,6 +29,18 @@ projet_m1-tect-web/
 │   └── ...
 └── README.md
 
+
+src/
+ └── users/
+     ├── dto/
+     │   ├── create-user.dto.ts
+     │   └── update-user.dto.ts
+     ├── user.entity.ts
+     ├── users.controller.ts
+     ├── users.service.ts
+     └── users.module.ts
+
+
 * Créer le Backend (NestJS) :
 ** Installer le CLI NestJS :
 npm i -g @nestjs/cli
@@ -64,6 +76,9 @@ DB_USERNAME=postgres
 DB_PASSWORD=your_password
 DB_NAME=your_database
 2. Modifie ton " AppModule.ts " pour utiliser ConfigModule :(contenu==voir le code)
+
+** Librairie officielle de NestJS qui fournit des fonctions utilitaires pour créer facilement des DTO : 
+npm install @nestjs/mapped-types : Il fournit des fonctions utilitaires comme PartialType, PickType, OmitType, etc., pour créer facilement des DTO dérivés :
 
 ** Swagger
 npm install --save @nestjs/swagger swagger-ui-express
