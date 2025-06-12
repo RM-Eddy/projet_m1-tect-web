@@ -1,0 +1,109 @@
+
+*****Projet E-commerce *****
+
+* Framework  :
+** Backend : NestJs
+** Frontend : NextJs
+
+* Base de données : PostgreSQL 
+** NomBD : ecomerce
+CREATE DATABASE ecomerce;
+\c ecomerce;
+
+*** les types ENUM nécessaires
+-- Statut de commande
+CREATE TYPE statut_commande AS ENUM ('en cours', 'envoyée', 'livrée', 'annulée');
+
+-- Rôle utilisateur
+CREATE TYPE role_utilisateur AS ENUM ('client', 'admin');
+
+-- Statut de paiement
+CREATE TYPE statut_paiement AS ENUM ('payé', 'en attente', 'échoué');
+
+-- Statut de livraison
+CREATE TYPE statut_livraison AS ENUM ('préparée', 'en transit', 'livrée', 'retournée');
+
+*** les tables : 
+
+-- Table utilisateurs
+CREATE TABLE users (
+    id_user SERIAL PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    adresse TEXT,
+    telephone VARCHAR(20),
+    role role_utilisateur DEFAULT 'client',
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (nom, email, mot_de_passe, adresse, telephone, role) VALUES ('eddy25', 'eddy25@mail.com', 'keymdpeddy25', 'couer 586', '0601020304', 'admin');
+
+-- Table catégories
+CREATE TABLE categories (
+    id_categorie SERIAL PRIMARY KEY,
+    nom_categorie VARCHAR(100) NOT NULL,
+    description TEXT
+);
+
+INSERT INTO categories (nom_categorie, description) VALUES
+('Chaussure', 'Chaussure ou Soulier'),
+('Electronique', 'Appareils et gadgets electroniques'),
+('Vetements', 'Vetements pour hommes et femmes'),
+('Maison', 'Articles pour la maison et la decoration');
+
+-- Table produits
+CREATE TABLE products (
+    id_produit SERIAL PRIMARY KEY,
+    nom_produit VARCHAR(150) NOT NULL,
+    description TEXT,
+    prix NUMERIC(10,2) NOT NULL,
+    stock INT DEFAULT 0,
+    image_url VARCHAR(255),
+    id_categorie INT REFERENCES categories(id_categorie),
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO products (nom_produit, description, prix, stock, image_url, id_categorie) VALUES ('Smartphone Galaxy A55', 'Ecran 128 Go Android 13', 399.99, 40, 'images/galaxy_a55.jpg', 1),
+('Casque Bluetooth', 'Casque sans fil avec reduction de bruit', 89.99, 25, 'images/casque_bt.jpg', 1),
+('T-shirt homme coton bio', 'Disponible en tailles M L XL', 15.00, 100, 'images/tshirt_homme.jpg', 2),
+('Robe  femme', 'Robe legere en coton pour , 29.90, 70, 'images/robe_ete.jpg', 2),
+('Lampe de chevet LED', 'Lampe tactile avec 3 niveaux de luminosité', 24.50, 60, 'images/lampe_led.jpg', 3);
+
+
+-- Table commandes
+CREATE TABLE orders (
+    id_commande SERIAL PRIMARY KEY,
+    id_user INT REFERENCES users(id_user),
+    date_commande TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut statut_commande DEFAULT 'en cours',
+    total NUMERIC(10,2)
+);
+
+-- Table détails de commande
+CREATE TABLE order_items (
+    id_detail SERIAL PRIMARY KEY,
+    id_commande INT REFERENCES orders(id_commande),
+    id_produit INT REFERENCES products(id_produit),
+    quantite INT NOT NULL,
+    prix_unitaire NUMERIC(10,2) NOT NULL
+);
+
+-- Table paiements
+CREATE TABLE payments (
+    id_paiement SERIAL PRIMARY KEY,
+    id_commande INT REFERENCES orders(id_commande),
+    montant NUMERIC(10,2) NOT NULL,
+    methode_paiement VARCHAR(50),
+    date_paiement TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut statut_paiement DEFAULT 'en attente'
+);
+
+-- Table livraisons
+CREATE TABLE shipping (
+    id_expedition SERIAL PRIMARY KEY,
+    id_commande INT REFERENCES orders(id_commande),
+    adresse_livraison TEXT NOT NULL,
+    date_expedition TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut_livraison statut_livraison DEFAULT 'préparée'
+);

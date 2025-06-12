@@ -1,3 +1,16 @@
-node_modules/ 
-dist/ 
-package-lock.json 
+# Ignorer les dossiers temporaires
+node_modules/
+dist/
+
+# Fichiers de dépendances
+package-lock.json
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# .env si tu as des fichiers de config sensibles
+.env

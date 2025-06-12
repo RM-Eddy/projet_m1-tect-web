@@ -1,0 +1,53 @@
+Voici une explication claire des différentes commandes pour **lancer un serveur NestJS** :
+
+---
+
+## ✅ 1. **Commande principale recommandée pour le développement**
+
+```bash
+npm run start:dev
+```
+
+### 🔍 Explication :
+
+* Démarre le serveur **en mode développement**.
+* Utilise **`ts-node`** pour exécuter le code **TypeScript directement** (sans le compiler manuellement).
+* Recharge automatiquement à chaque modification (**Hot Reload** avec `@nestjs/cli` et `webpack`).
+
+### ✅ C’est la commande à utiliser pendant le développement.
+
+---
+
+## ✅ 2. **Autres commandes disponibles**
+
+### 🔸 `npm run start`
+
+* Démarre l'application en mode **production**.
+* Compile d’abord les fichiers TypeScript en JavaScript, puis exécute le résultat.
+
+### 🔸 `npm start`
+
+* **Alias de `npm run start`**.
+* Marche si dans `package.json`, tu as ceci :
+
+```json
+"scripts": {
+  "start": "nest start"
+}
+```
+
+> ⚠️ Ne fait **pas** de rechargement automatique !
+
+---
+
+## 📋 Récapitulatif
+
+| Commande            | Mode          | Rechargement auto ? | Usage conseillé   |
+| ------------------- | ------------- | ------------------- | ----------------- |
+| `npm run start:dev` | Développement | ✅ Oui               | Pour coder        |
+| `npm run start`     | Production    | ❌ Non               | Avant déploiement |
+| `npm start`         | Production    | ❌ Non               | Alias de `start`  |
+
+---
+
+Souhaites-tu que je t’aide à ajouter un script personnalisé dans `package.json`, comme un `start:debug` ou un `start:prod` avec `build` ?

@@ -19,8 +19,14 @@ projet/
 
 * Structure recommandée : 
 projet_m1-tect-web/
-├── backend/          ← NestJS (API REST + Swagger + PostgreSQL)
-├── frontend/         ← Next.js (UI depuis Figma)
+├── backend/         
+│   ├── .env              ← ✅ ICI
+│   ├── src/
+│   ├── main.ts
+│   ├── app.module.ts
+│   └── ...
+├── frontend/         
+│   └── ...
 └── README.md
 
 * Créer le Backend (NestJS) :
@@ -33,22 +39,40 @@ nest new backend
 ** Se placer dans le dossier
 cd backend
 
-* Installer les dépendances PostgreSQL et Swagger : 
-* PostgreSQL + TypeORM
+* Installer les dépendances  initialement: 
+
+** Si ce n’est pas encore fait :
+npm install : est une commande Node.js(qui Installe toutes les dépendances listées dans le fichier package.json de ton projet)
+
+* Installer les dépendances après 
+
+** PostgreSQL + TypeORM
 npm install @nestjs/typeorm typeorm pg
 
-* Swagger
+*** explications :
+🔹@nestjs/typeorm : le module NestJS qui facilite l'intégration de TypeORM
+🔹 typeorm : l'ORM utilisé
+🔹 pg : le driver PostgreSQL
+
+** Module officiel de configuration :
+npm install @nestjs/config : Pour utiliser des variables d’environnement via un fichier " .env " et Il permet à NestJS de charger automatiquement les variables de ton fichier " .env " et Il expose un service ConfigService pour accéder facilement aux variables dans tes modules/services
+*** Étapes après l'installation : 
+1. Crée un fichier " .env " dans le dossier backend/ : (avec contenu)
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+DB_NAME=your_database
+2. Modifie ton " AppModule.ts " pour utiliser ConfigModule :(contenu==voir le code)
+
+** Swagger
 npm install --save @nestjs/swagger swagger-ui-express
 
-* Exécute cette commande dans le dossier backend :
+** Valider les champs d’un DTO et Transformer un objet brut en instance de classe:
 npm install class-validator class-transformer
 
-
-Dépendance	Rôle principal				Utilisation typique
-
-class-validator	Valider les champs d’un DTO			@IsNotEmpty(), @IsEmail(), etc.
-class-transformer	Transformer un objet brut en instance de classe	plainToInstance() ou via ValidationPipe
-
+* Lancer ou Démarrer  le serveur NestJS (de développement ): 
+npm run start:dev ou "npm run start" ou "npm start"
 
 
 
